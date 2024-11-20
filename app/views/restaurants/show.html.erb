@@ -1,0 +1,28 @@
+<h1><%= @restaurant.name %></h1>
+<p>Category: <%= @restaurant.category %></p>
+<p>Phone-number: <%= @restaurant.phone_number %></p>
+<p>Adress: <%= @restaurant.adress %></p>
+<%= link_to "Back to Restaurants", restaurants_path, class: "btn btn-primary" %>
+<%= link_to "Edit Restaurant", edit_restaurant_path(@restaurant), class: "card-link btn btn-primary" %>
+
+<p class="fs-3 text-center">Reviews</p>
+
+<ul>
+  <% @restaurant.reviews.each do |review| %>
+    <li class="card">
+      <div class="row g-0">
+        <div class="col-10">
+          <div class="card-body">
+            <h5 class="card-title">Rating: <%= review.rating %></h5>
+            <p class="card-text">Review: <%= review.content %></p>
+          </div>
+        </div>
+        <div class="col-2 d-flex align-items-center justify-content-center">
+          <%= link_to review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+            <i class="fa-regular fa-circle-xmark"></i>
+          <% end %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>
